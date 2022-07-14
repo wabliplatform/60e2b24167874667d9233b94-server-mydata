@@ -1,0 +1,159 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: lampralexandros@gmail.com
+  description: This is a sample openApi document
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://wabli.netlify.app/
+  title: TempApi
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- description: local-host
+  url: http://localhost:8090/v1
+security:
+- {}
+tags:
+- description: not yet ready
+  name: vprojects
+paths:
+  /vprojects:
+    post:
+      operationId: createvprojects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vprojects'
+        description: data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vprojects'
+          description: successful operation
+      summary: Creates the data
+      tags:
+      - vprojects
+      x-eov-operation-handler: controllers/VprojectsController
+  /vprojects/{vprojectsId}:
+    delete:
+      operationId: deletevprojects
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: vprojectsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+      summary: Delete the element
+      tags:
+      - vprojects
+      x-eov-operation-handler: controllers/VprojectsController
+    get:
+      operationId: getvprojects
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: vprojectsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vprojects'
+          description: successful operation
+      summary: Get the element
+      tags:
+      - vprojects
+      x-eov-operation-handler: controllers/VprojectsController
+    put:
+      operationId: updatevprojects
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: vprojectsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vprojects'
+        description: data to be updated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vprojects'
+          description: successful operation
+      summary: Updates the element
+      tags:
+      - vprojects
+      x-eov-operation-handler: controllers/VprojectsController
+  /vprojects/getAll:
+    get:
+      operationId: getAllvprojects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/vprojects'
+                type: array
+          description: successful operation
+      summary: Get all the data
+      tags:
+      - vprojects
+      x-method-getAll: "true"
+      x-eov-operation-handler: controllers/VprojectsController
+components:
+  schemas:
+    vprojects:
+      example:
+        prFunding: 0.8008281904610115
+        prName: prName
+        _id: _id
+        prSDate: 2000-01-23
+        prEDate: 2000-01-23
+      properties:
+        _id:
+          type: string
+        prName:
+          type: string
+        prSDate:
+          format: date
+          type: string
+        prEDate:
+          format: date
+          type: string
+        prFunding:
+          format: double
+          type: number
+      required:
+      - prEDate
+      - prFunding
+      - prName
+      - prSDate
+      type: object
